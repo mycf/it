@@ -1,8 +1,11 @@
-# My Awesome Book
+```
+spool flush.sql
+select 'flushback table '|| original_name||' to before drop;' from user_recyclebin where type='TABLE'；
+spool off
 
-* [x] > ```
-  > This file file serves as your book's preface, a great place to describe your book's content and ideas.
-  > ```
+```
+
+
 
 
 
