@@ -1,0 +1,6 @@
+```
+redis-trib.rb check 
+```
+
+
+
