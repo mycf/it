@@ -8,5 +8,9 @@ spool off
 
 导出指定用户下的表
 
-exp mbank/mbank@mbank owner=mbank file=xxx.dump 
+exp mbank/mbank@mbank owner=mbank file=xxx.dump
+
+导入
+
+imp mbank/mbank@mbank file=xxx.dump full=y
 
