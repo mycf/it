@@ -18,6 +18,6 @@
     * [函数属性、方法和构造函数](javascript/di-ba-zhang-han-shu/han-shu-shu-xing-3001-fang-fa-he-gou-zao-han-shu.md)
   * [第六章对象](javascript/di-liu-zhang-dui-xiang.md)
 * [Linux](linux.md)
-* IDEA
+* [IDEA](idea.md)
 * mysql
 
