@@ -13,4 +13,10 @@
 * [Safari调试App](safaridiao-shi-app.md)
 * [计算机网络](ji-suan-ji-wang-luo.md)
   * [第一章局域网](ji-suan-ji-wang-luo/di-yi-zhang-ju-yu-wang.md)
+* [JavaScript](javascript.md)
+  * [第八章函数](javascript/di-ba-zhang-han-shu.md)
+    * [函数属性、方法和构造函数](javascript/di-ba-zhang-han-shu/han-shu-shu-xing-3001-fang-fa-he-gou-zao-han-shu.md)
+  * [第六章对象](javascript/di-liu-zhang-dui-xiang.md)
+* [Linux](linux.md)
+* IDEA
 
