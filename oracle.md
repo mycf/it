@@ -1,4 +1,8 @@
 ```
+查看oracle实例名
+ps -ef|grep ora_
+
+
 查看监听
 lsnrctl status
 启动监听器
@@ -22,6 +26,10 @@ create user username identified by passwd;
 grant dba to username；
 使用新的用户连接数据库
 connect mbank/mbank@mbank
+
+删除实例
+vi /etc/oratab 删除对应实例
+删除对应文件夹 find /oracle -name sid_name|xargs rm -rf {}
 
 ```
 
