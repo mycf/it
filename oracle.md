@@ -1,4 +1,18 @@
 ```
+查看监听
+lsnrctl status
+启动监听器
+lsnrctl start
+停止监听器
+lsnrctl stop
+
+导出指定用户下的表
+exp mbank/mbank@mbank owner=mbank file=xxx.dmp
+导出指定表
+exp mbank/mbank@mbank tables=table_name file=xx.dmp
+导入
+imp mbank/mbank@mbank file=xxx.dmp full=y ignore=y
+
 sqlplus / as sysdba
 查看当前的连接用户
 show user
@@ -9,12 +23,6 @@ grant dba to username；
 使用新的用户连接数据库
 connect mbank/mbank@mbank
 
-导出指定用户下的表
-exp mbank/mbank@mbank owner=mbank file=xxx.dmp
-导出指定表
-exp mbank/mbank@mbank tables=table_name file=xx.dmp
-导入
-imp mbank/mbank@mbank file=xxx.dmp full=y ignore=y
 ```
 
 
