@@ -14,7 +14,7 @@ exp mbank/mbank@mbank owner=mbank file=xxx.dmp
 导出指定表
 exp mbank/mbank@mbank tables=table_name file=xx.dmp
 导入
-imp mbank/mbank@mbank file=xxx.dmp full=y
+imp mbank/mbank@mbank file=xxx.dmp full=y ignore=y
 ```
 
 
