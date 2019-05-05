@@ -31,6 +31,7 @@ connect mbank/mbank@mbank
 vi /etc/oratab 删除对应实例
 删除对应文件夹 find /oracle -name sid_name|xargs rm -rf {}
 
+
 ```
 
 
