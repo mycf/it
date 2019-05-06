@@ -1,6 +1,4 @@
-获取idea激活码 http://idea.lanyus.com/getkey
-
-
+获取idea激活码 [http://idea.lanyus.com/getkey](http://idea.lanyus.com/getkey)
 
 
 
