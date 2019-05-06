@@ -31,7 +31,15 @@ connect mbank/mbank@mbank
 vi /etc/oratab 删除对应实例
 删除对应文件夹 find /oracle -name sid_name|xargs rm -rf {}
 
+set head off􏲐􏲨􏲨􏲩􏲪􏲫􏰏􏰡􏲬􏲭􏲮输出域标题，缺省为􏲩􏲪􏲫􏰏􏰡􏲬􏲭􏲮on
+set linesize 20000􏲐
+set echo off􏲐􏲸􏲹 显示命令行本身缺省为on
+set feedback off    回显本次命令处理的记录条数
+set pagesize 0    为避免分页，可设置0
 
+set termout off
+set trimout on
+set trimspool on􏲐􏳈􏳉􏳏􏰽􏰈􏳐spool􏳑􏲨􏲩􏲺􏰣􏰋􏳋􏳌􏳍􏳎􏰡􏲬􏲭􏲮off
 ```
 
 
