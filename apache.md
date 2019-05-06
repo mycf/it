@@ -1,14 +1,11 @@
-
-
 Apache反向代理session丢失
 
 ```
-proxyPassReverse /foo  http://172.21.8.12:11200/foo
+proxyPassReverse /mbank  http://172.21.8.12:11200/mbank_srcb
 ```
 
 ```
-
-proxyPass        /foo  http://172.21.8.12:11200/foo
+proxyPass        /mbank  http://172.21.8.12:11200/mbank_srcb
 ```
 
 
