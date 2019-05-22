@@ -2,7 +2,9 @@
 
 修改sql格式化方式![](/assets/import3.png)idea解决properties文件中文乱码的问题![](/assets/import2.png)
 
+shift+alt+insert进入列选择模式，可选择一列或者多列
 
 
- shift+alt+insert进入列选择模式，可选择一列或者多列
+
+![](/assets/import4.png)
 
