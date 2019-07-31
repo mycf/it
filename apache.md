@@ -10,7 +10,7 @@ proxyPass        /mbank  http://172.21.8.12:11200/mbank_srcb
 
 ```
 <LimitExcept POST>
-  Require valid-user
+    Require all denied
 </LimitExcept>
 ```
 
