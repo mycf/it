@@ -10,5 +10,3 @@ proxyPass        /mbank  http://172.21.8.12:11200/mbank_srcb
 
 
 
-
-
