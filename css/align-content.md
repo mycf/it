@@ -6,8 +6,6 @@
 
 ![](/assets/import6.png)
 
-
-
 # center
 
 ```
@@ -16,11 +14,22 @@
 
 ![](/assets/import7.png)
 
-flex-start
+# flex-start
 
 ```
 元素位于容器的开头。
 ```
 
 ![](/assets/import8.png)
+
+# flex-end
+
+```
+	
+元素位于容器的结尾。
+```
+
+![](/assets/import9.png)
+
+
 
