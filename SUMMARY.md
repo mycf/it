@@ -27,4 +27,6 @@
 * [httpd](apache.md)
 * [css](css.md)
   * [align-content](css/align-content.md)
+* [elasticsearch](elasticsearch.md)
+  * [删除索引](elasticsearch/shan-chu-suo-yin.md)
 
