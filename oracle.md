@@ -40,6 +40,51 @@ set pagesize 0    为避免分页，可设置0
 set termout off
 set trimout on
 set trimspool on􏲐􏳈􏳉􏳏􏰽􏰈􏳐spool􏳑􏲨􏲩􏲺􏰣􏰋􏳋􏳌􏳍􏳎􏰡􏲬􏲭􏲮off
+
+
+--查询默认表空间
+select default_tablespace from user_users;
+
+
+--查询当前用户下的所以表
+select table_name,tablespace_name,status
+from USER_TABLES;
+
+--查询当前用户下的索引
+select index_name,table_name,tablespace_name,status,table_owner from USER_INDEXES;
+
+--导出指定用户下所有表
+imp embank/embank@mbank file=czembank_20190912.dmp log=imp.log full=y ignore=y
+
+
+--lob类型表空间、索引空间迁移
+SELECT 'ALTER TABLE ' || T.TABLE_NAME || ' MOVE TABLESPACE EMBANKIDX LOB (' || L.COLUMN_NAME || ') STORE AS ' ||
+       L.SEGMENT_NAME || ' (TABLESPACE EMBANKIDX);'
+FROM user_TABLES T,
+     user_LOBS L
+WHERE T.TABLE_NAME = L.TABLE_NAME;
+
+--普通表空间迁移
+select 'alter table ' || table_name || ' move tablespace EMBANKDATA;'
+from user_tables
+where tablespace_name = 'USERS';
+
+--普通索引空间迁移
+SELECT 'alter index "'|| index_name ||'" rebuild online tablespace EMBANKIDX;'
+FROM user_indexes
+WHERE index_type = 'NORMAL'
+  AND table_owner = 'EMBANK'
+  AND dropped = 'NO'
+  AND TABLESPACE_NAME = 'USERS';
+
+
+-- 清空回收站
+purge recyclebin;
+
+-- 查询回收站内容
+select * from user_recyclebin;
+
+
 ```
 
 
