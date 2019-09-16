@@ -83,8 +83,6 @@ purge recyclebin;
 
 -- 查询回收站内容
 select * from user_recyclebin;
-
-
 ```
 
 
