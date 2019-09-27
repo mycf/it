@@ -29,4 +29,6 @@
   * [align-content](css/align-content.md)
 * [elasticsearch](elasticsearch.md)
   * [删除索引](elasticsearch/shan-chu-suo-yin.md)
+* [git](git.md)
+* [HTTP](http.md)
 
