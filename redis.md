@@ -10,13 +10,13 @@ redis-cli -p localhost -h 7001 -a 3edc4RFV
 查看redis集群状态
 cluster nodes
 cluster info
-
-
 ```
 
 redis是通过docker安装的
 
 ##### 进入redis命令行
+
+redis-cli（Redis Command Line Interface）是Redis自带的基于命令行的Redis客户端
 
 ```
 ➞docker exec -it redis redis-cli
@@ -25,7 +25,7 @@ redis是通过docker安装的
 
 **提示** redis命令不区分大小写
 
-#### 获得符合规则的键名列表￼         
+#### 获得符合规则的键名列表￼
 
 #### `KEYS pattern`![](/assets/import5.png)
 
