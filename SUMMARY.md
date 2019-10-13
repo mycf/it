@@ -23,7 +23,6 @@
 * [IDEA](idea.md)
 * [mysql](mysql.md)
 * [Spring](spring.md)
-  * [面向切面](spring/mian-xiang-qie-mian.md)
 * [httpd](apache.md)
 * [css](css.md)
   * [align-content](css/align-content.md)
