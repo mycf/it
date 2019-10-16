@@ -96,3 +96,7 @@ Spring的切面 由包裹了目标对象的代理类实现。
 
 直到应用需要被代理的bean时，Spring才 创建代理对象。如果使用的是ApplicationContext的话，在ApplicationContext从BeanFactory中加载所有bean的时候，Spring才会创建被代理的对象。因为Spring运行时才创建代理对象，所以我们不需要特殊的编译器来织入SpringAOP的切面。
 
+
+
+
+
