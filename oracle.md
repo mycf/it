@@ -85,5 +85,12 @@ purge recyclebin;
 select * from user_recyclebin;
 ```
 
+### 锁表
+
+```
+SELECT s.sid, s.serial# FROM v$locked_object lo, dba_objects ao, v$session s WHERE ao.object_id = lo.object_id AND lo.session_id = s.sid;
+```
+
+  
 
 
