@@ -7,6 +7,7 @@
 | JasperReportsViewResolver | 将视图解析为JasperReports定义 |
 | ResourceBundleViewResolver | 将视图解析为资源bundle（一般为属性文件） |
 | TilesViewResolver | 将视图解析为Apache Tile定义，其中tile ID与视图名称相同。注意有两个不同的TilesViewResolver实现，分别对应于Tiles 2.0和Tiles 3.0 |
+| UrlBasedViewResolver  |  |
 
 
 
