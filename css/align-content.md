@@ -12,7 +12,7 @@
 元素位于容器的中心。
 ```
 
-![](/assets/import7.png)
+![](../assets/import7.png)
 
 # flex-start
 
@@ -29,6 +29,4 @@
 ```
 
 ![](/assets/import9.png)
-
-
 
