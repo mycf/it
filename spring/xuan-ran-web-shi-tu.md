@@ -15,3 +15,50 @@
 | XmlViewResolver                | 将视图解析为特定XML文件中的bean定义。类似于BeanNameViewResolver |
 | XsltViewResolver               | 将视图解析为XSLT转换后的结果                                 |
 
+
+
+#### 处理multipart形式的数据
+
+##### 1.配置multipart解析器
+
+委托给了MultipartResolver策略接口的实现，Spring3.1开始内置了两个MultipartResolver的实现
+
+* CommonsMultipartResolver：使用Jakarta Commons FileUpload解析multipart请求：
+* StandardServletMultipartResolver：依赖于Servlet 3.0对multipart请求的支持
+  （始于Spring 3.1）。
+
+配置multipart的具体参数（MultipartConfigElement）
+
+* 临时目录
+
+* 上传文件的最大容量（以字节为单位）。默认是没有限制的。
+* 整个multipart请求的最大容量（以字节为单位），不会关心有多少个part以及每个part的大小。默认是没有限制的。
+* 在上传的过程中，如果文件大小达到了一个指定最大容量（以字节为单位），将会写入到临时文件路径中。默认值为0，也就是所有上传的文件都会写入到磁盘。
+
+
+
+```java
+		/**
+     * 配置DispatcherServlet的Servlet初始化类继承了AbstractAnnotationConfigDispatcherServletInitializer或AbstractDispatcherServletInitializer
+     * 实现customizeRegistration方法
+     */
+    @Override
+    protected void customizeRegistration(Dynamic registration) {
+        registration.setMultipartConfig(new MultipartConfigElement("/tmp/spittr/uploads"));
+    }
+```
+
+
+
+```java
+		/**
+     * 默认临时文件路径为Servlet容器的临时目录
+     */
+    @bean
+    public MultipartResolver multipartResolver() {
+        CommonsMultipartResolver multipartResolver = new CommonsMultipartResolver();
+        multipartResolver.setUploadTempDir(new FileSystemResource("/tmp/spittr/uploads"));
+        return multipartResolver;
+    }
+```
+
