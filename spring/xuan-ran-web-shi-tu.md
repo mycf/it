@@ -35,30 +35,67 @@
 * 整个multipart请求的最大容量（以字节为单位），不会关心有多少个part以及每个part的大小。默认是没有限制的。
 * 在上传的过程中，如果文件大小达到了一个指定最大容量（以字节为单位），将会写入到临时文件路径中。默认值为0，也就是所有上传的文件都会写入到磁盘。
 
-
+###### StandardServletMultipartResolver
 
 ```java
-		/**
-     * 配置DispatcherServlet的Servlet初始化类继承了AbstractAnnotationConfigDispatcherServletInitializer或AbstractDispatcherServletInitializer
-     * 实现customizeRegistration方法
-     */
-    @Override
-    protected void customizeRegistration(Dynamic registration) {
-        registration.setMultipartConfig(new MultipartConfigElement("/tmp/spittr/uploads"));
-    }
+@Bean
+public MultipartResolver multipartResolver() {
+    return new StandardServletMultipartResolver();
+}
 ```
 
 
 
 ```java
-		/**
-     * 默认临时文件路径为Servlet容器的临时目录
-     */
-    @bean
-    public MultipartResolver multipartResolver() {
-        CommonsMultipartResolver multipartResolver = new CommonsMultipartResolver();
-        multipartResolver.setUploadTempDir(new FileSystemResource("/tmp/spittr/uploads"));
-        return multipartResolver;
-    }
+/**
+ * 配置DispatcherServlet的Servlet初始化类继承了AbstractAnnotationConfigDispatcherServletInitializer或AbstractDispatcherServletInitializer
+ * 实现customizeRegistration方法
+ */
+@Override
+protected void customizeRegistration(Dynamic registration) {
+  registration.setMultipartConfig(new MultipartConfigElement("/tmp/spittr/uploads", 2097152, 4194304, 0));
+}
 ```
+
+###### CommonsMultipartResolver
+
+```java
+/**
+ * 默认临时文件路径为Servlet容器的临时目录
+ * 
+ * @throws IOException
+ */
+@Bean
+public MultipartResolver multipartResolver() throws IOException {
+    CommonsMultipartResolver multipartResolver = new CommonsMultipartResolver();
+    multipartResolver.setUploadTempDir(new FileSystemResource("/tmp/spittr/uploads"));
+    return multipartResolver;
+}
+```
+
+
+
+##### 2.处理multipart请求
+
+###### 接受MultipartFile
+
+控制器方法参数上添加@RequestPart注解。
+
+```java
+@RequestMapping(value = "register", method = RequestMethod.POST)
+public String processRegisteration(@RequestPart("frofilePicture") MultipartFile multipartFile,
+        @Valid Spittle spittle, Errors errors) throws IllegalStateException, IOException {
+    if (errors.hasErrors()) {
+        return "registerForm";
+    }
+    //将上传的文件写入文件系统
+    multipartFile.transferTo(new File("/tmp/spittr/" + multipartFile.getOriginalFilename()));
+    spittleRepository.save(spittle);
+    return "redirect:/spittle/" + spittle.getUsername();
+}
+```
+
+###### 以Part的形式接受上传的文件
+
+在Servlet3.0容器中
 
