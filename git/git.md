@@ -12,6 +12,7 @@ $ git status
 
 ```bash
 $ git add
+$ git add . 提交所有未跟踪和修改的文件
 ```
 
 此时运行`git status`，看到文件状态为已暂存，在要提交的变更`Changes to be committed`下面
