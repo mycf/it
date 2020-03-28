@@ -3,7 +3,7 @@
 * [Introduction](README.md)
 * [mybatis](111.md)
   * [批量更新](mybatis/1111.md)
-* [oracle](oracle.md)
+* [oracle](oracle/oracle.md)
   * [表误删](oracle/biao-wu-shan.md)
   * [ORA-00257错误](oracle/ora-00257cuo-wu.md)
 * [java虚拟机](javaxu-ni-ji.md)
