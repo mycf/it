@@ -46,9 +46,109 @@ public class HeadOOM {
 
 《Java虚拟机规范》明确允许Java虚拟机实现自行选择是否支持栈的动态扩展，而HotSpot虚拟机的选择是不支持扩展，所以除非在创建线程申请内存时就因无法获得足够内存而出现OutOfMemoryError异常，否则在线程运行时是不会因为扩展而导致内存溢出的，只会因为栈容量无法容纳新的栈帧而导致StackOverflowError异常。
 
-使用-Xss参数减少栈内存容量。结果：抛出StackOverflowError异常，异常出现时输出的堆栈深度相应缩小。·
+- 使用-Xss参数减少栈内存容量。结果：抛出StackOverflowError异常，异常出现时输出的堆栈深度相应缩小。·
 
-定义了大量的本地变量，增大此方法帧中本地变量表的长度。结果：抛出StackOverflowError异常，异常出现时输出的堆栈深度相应缩小。
+- 定义了大量的本地变量，增大此方法帧中本地变量表的长度。结果：抛出StackOverflowError异常，异常出现时输出的堆栈深度相应缩小。
+
+```java
+package com.ycf.jvm;
+
+/**
+ * "vmArgs": "-Xss160k"
+ * JavaVMStackSOF
+ */
+public class JavaVMStackSOF {
+
+    private int stackLength = 1;
+
+    public void stackLeak() {
+        stackLength++;
+        stackLeak();
+    }
+
+    public static void main(String[] args) {
+        JavaVMStackSOF oom = new JavaVMStackSOF();
+        try {
+            oom.stackLeak();
+            
+        } catch (Throwable e) {
+            //TODO: handle exception
+            System.out.println("stack length:" + oom.stackLength);
+            throw e;
+        }
+    }
+}
+```
+
+```java
+package com.ycf.jvm;
+
+/**
+ * ￼
+ * 
+ * @author zzm￼
+ */
+public class JavaVMStackSOF1 {
+    
+    private static int stackLength = 0;
+
+    public static void test() {
+        long unused1, unused2, unused3, unused4, unused5,
+             unused6, unused7, unused8, unused9, unused10,
+             unused11, unused12, unused13, unused14, unused15,
+             unused16, unused17, unused18, unused19, unused20,
+             unused21, unused22, unused23, unused24, unused25,
+             unused26, unused27, unused28, unused29, unused30,
+             unused31, unused32, unused33, unused34, unused35,
+             unused36, unused37, unused38, unused39, unused40,
+             unused41, unused42, unused43, unused44, unused45,
+             unused46, unused47, unused48, unused49, unused50,
+             unused51, unused52, unused53, unused54, unused55,
+             unused56, unused57, unused58, unused59, unused60,
+             unused61, unused62, unused63, unused64, unused65,
+             unused66, unused67, unused68, unused69, unused70,
+             unused71, unused72, unused73, unused74, unused75,
+             unused76, unused77, unused78, unused79, unused80,
+             unused81, unused82, unused83, unused84, unused85,
+             unused86, unused87, unused88, unused89, unused90,
+             unused91, unused92, unused93, unused94, unused95,
+             unused96, unused97, unused98, unused99, unused100;
+
+        stackLength ++;
+        test();
+
+        unused1 = unused2 = unused3 = unused4 = unused5 =
+        unused6 = unused7 = unused8 = unused9 = unused10 =
+        unused11 = unused12 = unused13 = unused14 = unused15 =
+        unused16 = unused17 = unused18 = unused19 = unused20 =
+        unused21 = unused22 = unused23 = unused24 = unused25 =
+        unused26 = unused27 = unused28 = unused29 = unused30 =
+        unused31 = unused32 = unused33 = unused34 = unused35 =
+        unused36 = unused37 = unused38 = unused39 = unused40 =
+        unused41 = unused42 = unused43 = unused44 = unused45 =
+        unused46 = unused47 = unused48 = unused49 = unused50 =
+        unused51 = unused52 = unused53 = unused54 = unused55 =
+        unused56 = unused57 = unused58 = unused59 = unused60 =
+        unused61 = unused62 = unused63 = unused64 = unused65 =
+        unused66 = unused67 = unused68 = unused69 = unused70 =
+        unused71 = unused72 = unused73 = unused74 = unused75 =
+        unused76 = unused77 = unused78 = unused79 = unused80 =
+        unused81 = unused82 = unused83 = unused84 = unused85 =
+        unused86 = unused87 = unused88 = unused89 = unused90 =
+        unused91 = unused92 = unused93 = unused94 = unused95 =
+        unused96 = unused97 = unused98 = unused99 = unused100 = 0;
+    }
+
+    public static void main(String[] args) {
+        try {
+            test();
+        }catch (Error e){
+            System.out.println("stack length:" + stackLength);
+            throw e;
+        }
+    }
+}
+```
 
 对于不同版本的Java虚拟机和不同的操作系统，栈容量最小值可能会有所限制，这主要取决于操作系统内存分页大小。
 
@@ -68,3 +168,14 @@ HotSpot从JDK 7开始逐步“去永久代”的计划，并在JDK 8中完全使
 
 方法区的主要职责是用于存放类型的相关信息，如类名、访问修饰符、常量池、字段描述、方法描述等
 
+HotSpot还是提供了一些参数作为元空间的防御措施，主要包括：·
+
+- -XX：MaxMetaspaceSize：设置元空间最大值，默认是-1，即不限制，或者说只受限于本地内存大小。
+- -XX：MetaspaceSize：指定元空间的初始空间大小，以字节为单位，达到该值就会触发垃圾收集进行类型卸载，同时收集器会对该值进行调整：如果释放了大量的空间，就适当降低该值；如果释放了很少的空间，那么在不超过-XX：MaxMetaspaceSize（如果设置了的话）的情况下，适当提高该值。
+- -XX：MinMetaspaceFreeRatio：作用是在垃圾收集之后控制最小的元空间剩余容量的百分比，可减少因为元空间不足导致的垃圾收集的频率。类似的还有-XX：Max-MetaspaceFreeRatio，用于控制最大的元空间剩余容量的百分比。
+
+### 本机直接内存溢出
+
+直接内存（Direct Memory）的容量大小可通过-XX：MaxDirectMemorySize参数来指定，如果不去指定，则默认与Java堆最大值（由-Xmx指定）一致
+
+由直接内存导致的内存溢出，一个明显的特征是在Heap Dump文件中不会看见有什么明显的异常情况，如果读者发现内存溢出之后产生的Dump文件很小，而程序中又直接或间接使用了DirectMemory（典型的间接使用就是NIO），那就可以考虑重点检查一下直接内存方面的原因了。
