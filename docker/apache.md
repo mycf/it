@@ -1,11 +1,11 @@
 Apache反向代理session丢失
 
 ```
-proxyPassReverse /mbank  http://localhost:11200/mb
+proxyPassReverse /mb  http://localhost:11200/mb
 ```
 
 ```
-proxyPass        /mbank  http://localhost:11200/mb
+proxyPass        /mb  http://localhost:11200/mb
 ```
 
 ```
