@@ -18,3 +18,8 @@ maven vm参数修改
 
 Option + command + U 
 
+![image-20200530223410882](https://raw.githubusercontent.com/mycf/it/master/assets/image-20200530223410882.png)
+
+![image-20200530223533346](https://raw.githubusercontent.com/mycf/it/master/assets/image-20200530223533346.png)
+
+![image-20200530223615555](https://raw.githubusercontent.com/mycf/it/master/assets/image-20200530223615555.png)
